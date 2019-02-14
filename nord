@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ -z "$NORD_XTERM_SESSION" ]; then
+  NORD_XTERM_SESSION="true" xterm -e "$0"
+fi
+
+
+# Get the server recommendations from nord's website based on our location
+curl -s 'https://nordvpn.com/wp-admin/admin-ajax.php?action=servers_recommendations' | \
+# Get the first recommendation from the array
+#   -r = don't put the outputted string in quotes
+  jq -r '.[0].hostname' | \
+# ensure jq only gives us one value
+  head -n 1 | \
+# validate the hostname matches what we expected
+  validate '^[a-zA-Z0-9]*\.nordvpn\.com$' | \
+# Use the recommendation over udp
+#   xargs is used to inject the recommendation into the openvpn command
+  xargs -I{} sudo openvpn --config '/etc/openvpn/ovpn_udp/{}.udp.ovpn' \
+\
+|| sleep 5

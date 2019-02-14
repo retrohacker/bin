@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+xrandr \
+  --output VGA-1 --off \
+  --output HDMI-1 --off \
+  --output DP-1 --off \
+  --output HDMI-2 --off \
+  --output DP-2 --off \
+  --output DP-3 --off \
+  --output SVIDEO-1 --off \
+  --output LVDS-1 --mode 1280x800 --rotate right
+xsetwacom set "Wacom Serial Penabled 1FG Touchscreen Finger touch" rotate cw
+xsetwacom set "Wacom Serial Penabled 1FG Touchscreen Pen stylus" rotate cw
+xsetwacom set "Wacom Serial Penabled 1FG Touchscreen Pen eraser" rotate cw
+/usr/bin/setxkbmap -option "caps:swapescape"

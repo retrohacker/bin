@@ -1,0 +1,3 @@
+#!/bin/bash
+
+xterm -e 'sudo openvpn --config /etc/openvpn/access.ovpn.netflix.net_20180826_ubuntu.ovpn'
