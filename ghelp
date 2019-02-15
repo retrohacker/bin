@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+for file in `ls "$DIR" | grep '^g.*$'`
+do
+  if [ "$file" == "ghelp" ]
+  then
+    continue
+  fi
+  echo "=== $file ==="
+  echo
+    cat "$DIR/$file" | grep -v '^#' | grep -v '^$' | grep -v '^BRANCH='
+  echo
+done
