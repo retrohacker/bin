@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Much better palm detection for touchpad, makes typing without triggering the
+# mousepad much easier
+
+synclient PalmDetect=1
+synclient PalmMinWidth=4
+synclient PalmMinZ=30
+killall syndaemon || true
+syndaemon -i 0.2 -K -t -d
